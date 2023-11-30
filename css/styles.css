@@ -9,18 +9,47 @@ h1 {
     color: #333;
 }
 
-div {
+
+/*contenedor-Banderas banderas  info-banderas*/
+
+#countries-list {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 20px;
 }
 
-.texto-img {
-    font-size: 13px;
+.contenedor-Banderas {
+    display: flex;
+}
+
+.banderas {
+    display: flex;
+    flex-direction: column;
 }
 
 img {
-    max-width: 125px;
+    width: 250px;
+    height: 150px;
 }
+
+.info-banderas {
+    display: none;
+    position: fixed;
+    background-color: white;
+    width: 400px;
+    max-width: 100%;
+    padding: 30px 50px;
+    border-radius: 5px;
+    font-size: 15px;
+    z-index: 1;
+}
+
+p
+/*.info-banderas {
+    position: absolute;
+    display: none;
+    background-color: white;
+    margin-top: 200px;
+    z-index: 1001;
+}*/

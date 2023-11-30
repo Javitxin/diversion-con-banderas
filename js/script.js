@@ -19,6 +19,10 @@ Bandera, a la izq nomnbre del país
         lado por el que conducen: car.side:
 
 */
+const modal = document.getElementById('modal');
+let nuevoArraObj = [{}];
+let prue;
+let contId = 0;
 const getBanderas = async() => {
     try {
         const response = await fetch('https://restcountries.com/v3/all');
@@ -29,10 +33,6 @@ const getBanderas = async() => {
 
 
         ordenarPaises(data);
-        /*
-                const paisesOrdenados = data.sort((a, b) => a.name.common.localeCompare(b.name.common))
-                console.log(paisesOrdenados);
-          */
 
 
     } catch (error) {
@@ -40,7 +40,6 @@ const getBanderas = async() => {
     }
 };
 // Tengo que Crear la funcion que me abra la ventana y muestre la información
-const prueba = () => console.log('prueba');
 
 
 
@@ -50,16 +49,40 @@ const ordenarPaises = (pais) => {
     const paisesOrdenados = pais.sort((a, b) => a.name.common.localeCompare(b.name.common))
     container = document.getElementById('countries-list');
     pais.forEach((data) => {
-        //console.log(data.flags[1])
-        let template = `<figure><img id=banderas src=${data.flags[0]} onclick=prueba()></img>
-        <figcaption class=texto-img>${data.name.common}</figcaption>
-        </figure>`;
+        //console.log(data.index())
+        prue = data.name.common;
+        let template = `<div class="contenedor-Banderas">
+                            <div class="banderas" onclick="ventanModal(this)">
+                                <img src="${data.flags[0]}">
+                                <p>${data.name.common}</p>
+                            </div>
+                            <div class="info-banderas">
+                                <img src=${data.flags[0]}>
+                                <p>${data.name.common}</p>
+                                <p>Capital: ${data.capital}</p>
+                                <p>Población: ${data.population}</p>
+                                <p>Lado por dnde conducen: ${data.car.side}</p>
+                                <input type="button" value="Cerrar" onclick="ocultarDatos(this)">
+                            </div>
+                        </div>`;
         container.innerHTML += template;
-
     });
 
     console.log(paisesOrdenados);
 }
+const ventanModal = (obj) => {
+    const datos = obj.closest('.contenedor-Banderas').querySelector('.info-banderas');
+    datos.style.display = 'block';
+    datos.style.visibility = 'visible';
+}
+const ocultarDatos = (obj) => {
+    const datos = obj.closest('.info-banderas')
+    datos.removeAttribute('style');
+    datos.display = 'none';
+    datos.style.visibility = 'hidden';
+}
+
+
 
 
 getBanderas();
